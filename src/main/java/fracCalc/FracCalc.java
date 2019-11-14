@@ -4,11 +4,17 @@
 
 package fracCalc;
 
+import java.util.*;
 public class FracCalc {
 
     public static void main(String[] args)
     {
         // TODO: Read the input from the user and call produceAnswer with an equation
+    	Scanner s = new Scanner(System.in);
+    	System.out.print("Please enter fractions to calculate: ");
+    	String userInput = s.nextLine();
+    	
+    	System.out.println(produceAnswer(userInput)); 
 
     }
 
@@ -23,10 +29,23 @@ public class FracCalc {
     public static String produceAnswer(String input)
     {
         // TODO: Implement this function to produce the solution to the input
+    	Scanner s = new Scanner(input); 
+    	String operand1 = s.next();
+    	String operator = s.next(); 
+    	String operand2 = s.next(); 
 
-        return "";
+        return operand2;
+
     }
+
 
     // TODO: Fill in the space below with any helper methods that you think you will need
 
-}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    }
