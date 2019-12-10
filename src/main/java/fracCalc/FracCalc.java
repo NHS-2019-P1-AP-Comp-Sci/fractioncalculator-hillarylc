@@ -7,7 +7,6 @@ package fracCalc;
 import java.util.*;
 
 public class FracCalc {
-	public static String result;
 
 	public static void main(String[] args) {
 		// TODO: Read the input from the user and call produceAnswer with an equation
@@ -15,10 +14,12 @@ public class FracCalc {
 		System.out.print("Please enter fractions to calculate: ");
 		String input = s.nextLine();
 		while (!input.equals("quit")) {
-			String answer = produceAnswer(input);
-			System.out.println(result);
+			System.out.println(produceAnswer(input));
 			System.out.print("Please enter fractions to calculate: ");
 			input = s.nextLine();
+			String answer = produceAnswer(input);
+			System.out.println(answer);
+
 		}
 		s.close();
 	}
@@ -43,8 +44,8 @@ public class FracCalc {
 
 		// For multiplication operator
 		if (input.indexOf('*') != -1) {
-			first = input.substring(0, input.indexOf('*'));
-			second = input.substring(input.indexOf('*') + 1);
+			first = input.substring(0, input.indexOf("*"));
+			second = input.substring(input.indexOf("*") + 1);
 			first = fracAt(first);
 			second = fracAt(second);
 
@@ -88,9 +89,9 @@ public class FracCalc {
 					+ Integer.parseInt(firstDenom) * Integer.parseInt(secondNum);
 
 			// For subtraction operator
-		} else if (input.substring(1).indexOf('-') != -1) {
-			first = input.substring(0, input.substring(1).indexOf('-') + 1);
-			second = input.substring(input.substring(1).indexOf('-') + 2);
+		} else if (input.substring(1).indexOf("-") != -1) {
+			first = input.substring(0, input.substring(1).indexOf("-") + 1);
+			second = input.substring(input.substring(1).indexOf("-") + 2);
 			first = fracAt(first);
 			second = fracAt(second);
 			String firstNum = first.substring(0, first.indexOf('/'));
