@@ -7,6 +7,7 @@ package fracCalc;
 import java.util.*;
 
 public class FracCalc {
+	public static String result;
 
 	public static void main(String[] args) {
 		// TODO: Read the input from the user and call produceAnswer with an equation
@@ -14,12 +15,10 @@ public class FracCalc {
 		System.out.print("Please enter fractions to calculate: ");
 		String input = s.nextLine();
 		while (!input.equals("quit")) {
-			System.out.println(produceAnswer(input));
+			String answer = produceAnswer(input);
+			System.out.println(result);
 			System.out.print("Please enter fractions to calculate: ");
 			input = s.nextLine();
-			String answer = produceAnswer(input);
-			System.out.println(answer);
-
 		}
 		s.close();
 	}
@@ -54,12 +53,10 @@ public class FracCalc {
 
 			String secondNum = second.substring(0, second.indexOf('/'));
 			String secondDenom = second.substring(second.indexOf('/') + 1);
-			result = "" + Integer.parseInt(firstNum) * 
-					Integer.parseInt(secondNum) + '/'
-					+ Integer.parseInt(firstDenom) * 
-					Integer.parseInt(secondDenom);
-			
-		// For addition operator
+			result = "" + Integer.parseInt(firstNum) * Integer.parseInt(secondNum) + '/'
+					+ Integer.parseInt(firstDenom) * Integer.parseInt(secondDenom);
+
+			// For addition operator
 		} else if (input.indexOf('+') != -1) {
 			first = input.substring(0, input.indexOf('+'));
 			second = input.substring(input.indexOf('+') + 1);
@@ -70,14 +67,12 @@ public class FracCalc {
 
 			String secondNum = second.substring(0, second.indexOf('/'));
 			String secondDenom = second.substring(second.indexOf('/') + 1);
-			result = "" + (Integer.parseInt(firstNum) * 
-					Integer.parseInt(secondDenom)
-							+ Integer.parseInt(secondNum) * 
-							Integer.parseInt(firstDenom))
-					+ '/' + Integer.parseInt(firstDenom) * 
-					Integer.parseInt(secondDenom);
-			
-		// For division operator
+			result = ""
+					+ (Integer.parseInt(firstNum) * Integer.parseInt(secondDenom)
+							+ Integer.parseInt(secondNum) * Integer.parseInt(firstDenom))
+					+ '/' + Integer.parseInt(firstDenom) * Integer.parseInt(secondDenom);
+
+			// For division operator
 		} else if (input.indexOf(" / ") != -1) {
 			first = input.substring(0, input.indexOf(" / "));
 			second = input.substring(input.indexOf(" / ") + 2);
@@ -89,12 +84,10 @@ public class FracCalc {
 
 			String secondNum = second.substring(0, second.indexOf('/'));
 			String secondDenom = second.substring(second.indexOf('/') + 1);
-			result = "" + Integer.parseInt(firstNum) * 
-					Integer.parseInt(secondDenom) + '/'
-					+ Integer.parseInt(firstDenom) * 
-					Integer.parseInt(secondNum);
-			
-		// For subtraction operator
+			result = "" + Integer.parseInt(firstNum) * Integer.parseInt(secondDenom) + '/'
+					+ Integer.parseInt(firstDenom) * Integer.parseInt(secondNum);
+
+			// For subtraction operator
 		} else if (input.substring(1).indexOf('-') != -1) {
 			first = input.substring(0, input.substring(1).indexOf('-') + 1);
 			second = input.substring(input.substring(1).indexOf('-') + 2);
@@ -105,14 +98,12 @@ public class FracCalc {
 
 			String secondNum = second.substring(0, second.indexOf('/'));
 			String secondDenom = second.substring(second.indexOf('/') + 1);
-			result = "" + (Integer.parseInt(firstNum) * 
-					Integer.parseInt(secondDenom)
-							- Integer.parseInt(secondNum) * 
-							Integer.parseInt(firstDenom))
-					+ '/' + Integer.parseInt(firstDenom) * 
-					Integer.parseInt(secondDenom);
-		
-		// For invalid input
+			result = ""
+					+ (Integer.parseInt(firstNum) * Integer.parseInt(secondDenom)
+							- Integer.parseInt(secondNum) * Integer.parseInt(firstDenom))
+					+ '/' + Integer.parseInt(firstDenom) * Integer.parseInt(secondDenom);
+
+			// For invalid input
 		} else {
 			result = "no result";
 		}
@@ -133,7 +124,7 @@ public class FracCalc {
 				neg = true;
 				in = in.substring(1);
 			}
-			
+
 			// For negative results
 			int und = in.indexOf('_');
 			int div = in.indexOf('/');
@@ -162,11 +153,10 @@ public class FracCalc {
 		return numer + "/" + denom;
 	}
 
-
 	public static void name(String str) {
 		System.out.println(str);
 	}
-	
+
 	// When the fraction does not have '_'
 	public static String otherFrac(String in) {
 		name(in);
@@ -232,5 +222,35 @@ public class FracCalc {
 		} else {
 			return "1";
 		}
+	}
+
+	// Finds the greatest common factor
+	public static int gcf(int numer, int denom) {
+		int gcf = 1;
+		int checkNumber = 0;
+		if (numer > denom) {
+
+			checkNumber = denom;
+
+		} else {
+
+			checkNumber = numer;
+
+		}
+
+		for (int i = 1; i <= checkNumber; i++) {
+			if (numer % i == 0 && denom % i == 0) {
+				gcf = i;
+			}
+		}
+
+		return gcf;
+	}
+
+	public static String reduce(int numer, int denom) {
+		int gcf = gcf(numer, denom);
+		numer = numer / gcf;
+		denom = denom / gcf;
+		return numer + "/" + denom;
 	}
 }
